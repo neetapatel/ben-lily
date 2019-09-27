@@ -1,57 +1,12 @@
-/*var text = new paper.PointText({
-  	point: view.center,
-		justification: "center",
-    content: "Ben Denzer",
-    fillColor: "#ed174c",
-    font: "htf-didot",
-    fontSize: 50,
-		strokeColor: "black",
-		strokeWidth: 0.5,
-});
-var text2 = new paper.PointText({
-  	point: view.center,
-		justification: "center",
-    content: "Lily Offit",
-    fillColor: "#a893c5",
-    font: "htf-didot",
-    fontSize: 50
-});*/
-
-// Import SVG
-// project.importSVG("../img/TypeForNeeta.pdf");
-
-/*
-paper.PointText.prototype.wordwrap=function(txt,max){
-    var lines=[];
-    var space=-1;
-    times=0;
-    function cut(){
-        for(var i=0;i<txt.length;i++){
-            (txt[i]==' ')&&(space=i);
-            if(i>=max){
-                (space==-1||txt[i]==' ')&&(space=i);
-                if(space>0){lines.push(txt.slice((txt[0]==' '?1:0),space));}
-                txt=txt.slice(txt[0]==' '?(space+1):space);
-                space=-1;
-                break;
-                }}check();}
-    function check(){if(txt.length<=max){lines.push(txt[0]==' '?txt.slice(1):txt);txt='';}else if(txt.length){cut();}return;}
-    check();
-    return this.content=lines.join('\n');
-    }
-
-var myText = new paper.PointText(view.center);
-myText.justification = 'center';
-myText.fillColor = '#ed174c';
-myText.font = 'htf-Didot';
-myText.fontSize = 150;
-myText.strokeColor = 'black';
-myText.strokeWidth = 1;
-myText.leading = 160;
-myText.wordwrap("Ben Denzer Lily Offit June 27, 2020 New York City", 14);
-*/
-
 // Add paintings to site
+/* var paintings = [];
+var group = new Group();
+for (var i = 0; i < 2; i++) {
+  var temp = new Raster("Image" + i);
+  group.addChild(temp);
+} */
+
+
 var ben = new Raster("ben");
 var lily = new Raster("lily");
 var bird1 = new Raster("bird1");
@@ -138,38 +93,51 @@ ben.onClick = function(event) {
   window.open("https://bendenzer.com");
 }
 
-// Give paintings a random position
+// not working
+ben.onMouseEnter = function(event) {
+  ben.style.cursor = "pointer";
+}
+
+var rasterW = [];
+var rasterY = [];
+var dX = [];
+var dY = [];
+var w, h, x, y, phi, xbound, ybound, xpos, ypos, imgw, imgh;
+
 for (k = 0; k < group.children.length; k++) {
+  // Give paintings a random position
 	group.children[k].position = Point.random() * view.size;
+  // store painting dimensions
+  w = rasterW[k] = group.children[k].width;
+  h = rasterY[k] = group.children[k].height;
+  // ensure position is within window frame
+  x = group.children[k].position.x;
+  y = group.children[k].position.y;
+  if (x < w/2 || x + w > view.bounds.width) group.children[k].position.x -= w;
+  if (y < h/2 || y + h > view.bounds.height) group.children[k].position.y -= h;
+  // Create an array of random destinations for each painting
+  phi = 2 * Math.PI * Math.random();
+  dX[k] = 2 * Math.cos(phi);
+  dY[k] = 2 * Math.sin(phi);
 }
-
-// Create an array of random destinations for each painting
-var destinations = [];
-for (j = 0; j < group.children.length; j++) {
-  destinations[j] = Point.random() * view.size;
-}
-
-/*
-// Tween all paintings
-for (i = 0; i < group.children.length; i++) {
-	var aTween = group.children[i].tween({'position': destinations[i]}, {duration: 5000});
-  aTween.then(function() {
-    destinations[i] = Point.random() * view.size;
-    group.children[i].tween({'position': destinations[i]}, {duration: 5000});
-  });
-  aTween.repeat(Infinity);
-}
-*/
-
 
 // Move the paintings
 function onFrame(event) {
-	for (i = 0; i < group.children.length; i++) {
-		 var vector = (destinations[i] - group.children[i].position) / 4;
-		 vector.normalize(1);
-		 group.children[i].position += vector / 50;
-		 if (vector.length < 1) {
-			 destinations[i] = Point.random() * view.size;
-		 }
-	}
+  // change frame rate to 30 fps
+  if (event.count % 2 === 0) {
+    xbound = view.bounds.width;
+    ybound = view.bounds.height;
+  	for (i = 0; i < group.children.length; i++) {
+      xpos = group.children[i].position.x;
+      ypos = group.children[i].position.y;
+      imgw = group.children[i].width;
+      imgh = group.children[i].height;
+      // boundary logic
+      if( xpos<imgw/2 || xpos>xbound-imgw/2) dX[i]=-dX[i];
+      if( ypos<imgh/2 || ypos>ybound-imgh/2) dY[i]=-dY[i];
+      // animate
+  		group.children[i].position.x += dX[i];
+      group.children[i].position.y += dY[i];
+  	}
+  }
 }
