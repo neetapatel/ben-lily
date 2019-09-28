@@ -1,3 +1,145 @@
+// add type
+
+/*
+// attempt at using actual type
+var line = new PointText(new Point(200, 50));
+line.justification = 'center';
+line.fillColor = 'black';
+line.content = 'Ben Denzer';
+var line2 = new PointText(new Point(200, 100));
+line2.justification = 'center';
+line2.fillColor = 'black';
+line2.content = 'Lily Offit';
+var line3 = new PointText(new Point(200, 150));
+line3.justification = 'center';
+line3.fillColor = 'black';
+line3.content = 'June 28, 2020';
+var line4 = new PointText(new Point(200, 200));
+line4.fillColor = 'black';
+line4.content = 'New York City';
+line4.style = {
+    fontFamily: 'HTFDidot',
+    fontSize: 200,
+    fillColor: 'red',
+    justification: 'center'
+};
+*/
+
+// attempt at stacking background images
+var bg1 = new Raster("bg-1");
+var path1 = new Path.Rectangle({
+    point: [0, 0],
+    size: [view.bounds.width, view.bounds.height/4]
+});
+bg1.fitBounds(path1.bounds);
+
+var bg2 = new Raster("bg-2");
+var path2 = new Path.Rectangle({
+    point: [0, view.bounds.height/4],
+    size: [view.bounds.width, view.bounds.height/4]
+});
+bg2.fitBounds(path2.bounds);
+
+var bg3 = new Raster("bg-3");
+var path3 = new Path.Rectangle({
+    point: [0, (view.bounds.height/4) * 2],
+    size: [view.bounds.width, view.bounds.height/4]
+});
+bg3.fitBounds(path3.bounds);
+
+var bg4 = new Raster("bg-4");
+var path4 = new Path.Rectangle({
+    point: [0, (view.bounds.height/4) * 3],
+    size: [view.bounds.width, view.bounds.height/4]
+});
+bg4.fitBounds(path4.bounds);
+
+view.onResize = function() {
+  path1 = new Path.Rectangle({
+      point: [0, 0],
+      size: [view.bounds.width, view.bounds.height/4]
+  });
+  bg1.fitBounds(path1.bounds);
+  path2 = new Path.Rectangle({
+      point: [0, view.bounds.height/4],
+      size: [view.bounds.width, view.bounds.height/4]
+  });
+  bg2.fitBounds(path2.bounds);
+  path3 = new Path.Rectangle({
+      point: [0, (view.bounds.height/4) * 2],
+      size: [view.bounds.width, view.bounds.height/4]
+  });
+  bg3.fitBounds(path3.bounds);
+  path4 = new Path.Rectangle({
+      point: [0, (view.bounds.height/4) * 3],
+      size: [view.bounds.width, view.bounds.height/4]
+  });
+  bg4.fitBounds(path4.bounds);
+}
+
+// links for background text images
+// on mouse enter...
+bg1.onMouseEnter = function() {
+  // ...set canvas cursor to pointer
+  view.element.style.setProperty('cursor', 'pointer');
+}
+// on mouse leave...
+bg1.onMouseLeave = function() {
+  // ...set canvas cursor to default
+  view.element.style.setProperty('cursor', null);
+}
+bg1.onClick = function(event) {
+  window.open("https://bendenzer.com");
+}
+bg2.onMouseEnter = function() {
+  // ...set canvas cursor to pointer
+  view.element.style.setProperty('cursor', 'pointer');
+}
+// on mouse leave...
+bg2.onMouseLeave = function() {
+  // ...set canvas cursor to default
+  view.element.style.setProperty('cursor', null);
+}
+bg2.onClick = function(event) {
+  window.open("https://cargocollective.com/lilyoffit");
+}
+bg3.onMouseEnter = function() {
+  // ...set canvas cursor to pointer
+  view.element.style.setProperty('cursor', 'pointer');
+}
+// on mouse leave...
+bg3.onMouseLeave = function() {
+  // ...set canvas cursor to default
+  view.element.style.setProperty('cursor', null);
+}
+bg3.onClick = function(event) {
+  window.open("https://images.app.goo.gl/xwUdw4H57dYov73T9");
+}
+bg4.onMouseEnter = function() {
+  // ...set canvas cursor to pointer
+  view.element.style.setProperty('cursor', 'pointer');
+}
+// on mouse leave...
+bg4.onMouseLeave = function() {
+  // ...set canvas cursor to default
+  view.element.style.setProperty('cursor', null);
+}
+bg4.onClick = function(event) {
+  window.open("https://images.app.goo.gl/gMTpCLH6L32y7KCE6");
+}
+
+/*
+var groupType = new Group();
+groupType.addChild(bg1);
+groupType.addChild(bg2);
+groupType.addChild(bg3);
+groupType.addChild(bg4);
+groupType.postion = view.center;
+*/
+
+// new active layer
+var secondLayer = new Layer();
+
 // add ben painting + href
 var ben = new Raster("ben");
 // on mouse enter...
