@@ -1,13 +1,20 @@
-// Add paintings to site
-/* var paintings = [];
-var group = new Group();
-for (var i = 0; i < 2; i++) {
-  var temp = new Raster("Image" + i);
-  group.addChild(temp);
-} */
-
-
+// add ben painting + href
 var ben = new Raster("ben");
+// on mouse enter...
+ben.onMouseEnter = function() {
+  // ...set canvas cursor to pointer
+  view.element.style.setProperty('cursor', 'pointer');
+}
+// on mouse leave...
+ben.onMouseLeave = function() {
+  // ...set canvas cursor to default
+  view.element.style.setProperty('cursor', null);
+}
+ben.onClick = function(event) {
+  window.open("https://bendenzer.com");
+}
+
+// add all other paintings
 var lily = new Raster("lily");
 var bird1 = new Raster("bird1");
 var bird2 = new Raster("bird2");
@@ -46,9 +53,9 @@ var sandwich1 = new Raster("sandwich1");
 var spoon1 = new Raster("spoon1");
 var spoon2 = new Raster("spoon2");
 
-// Create a group
+// create a group
 var group = new Group();
-// Move paintings into group
+// move paintings into group
 group.addChild(ben);
 group.addChild(lily);
 group.addChild(bird1);
@@ -88,24 +95,13 @@ group.addChild(sandwich1);
 group.addChild(spoon1);
 group.addChild(spoon2);
 
-// Add image out-links
-ben.onClick = function(event) {
-  window.open("https://bendenzer.com");
-}
-
-// not working
-ben.onMouseEnter = function(event) {
-  ben.style.cursor = "pointer";
-}
-
 var rasterW = [];
 var rasterY = [];
 var dX = [];
 var dY = [];
 var w, h, x, y, phi, xbound, ybound, xpos, ypos, imgw, imgh;
-
 for (k = 0; k < group.children.length; k++) {
-  // Give paintings a random position
+  // give paintings a random position
 	group.children[k].position = Point.random() * view.size;
   // store painting dimensions
   w = rasterW[k] = group.children[k].width;
@@ -115,13 +111,13 @@ for (k = 0; k < group.children.length; k++) {
   y = group.children[k].position.y;
   if (x < w/2 || x + w > view.bounds.width) group.children[k].position.x -= w;
   if (y < h/2 || y + h > view.bounds.height) group.children[k].position.y -= h;
-  // Create an array of random destinations for each painting
+  // create an array of random destinations for each painting
   phi = 2 * Math.PI * Math.random();
   dX[k] = 2 * Math.cos(phi);
   dY[k] = 2 * Math.sin(phi);
 }
 
-// Move the paintings
+// move the paintings
 function onFrame(event) {
   // change frame rate to 30 fps
   if (event.count % 2 === 0) {
@@ -135,6 +131,9 @@ function onFrame(event) {
       // boundary logic
       if( xpos<imgw/2 || xpos>xbound-imgw/2) dX[i]=-dX[i];
       if( ypos<imgh/2 || ypos>ybound-imgh/2) dY[i]=-dY[i];
+      // edge cases (literally)
+      if ( xpos+imgw/2 > xbound ) group.children[i].position.x = xbound - imgw/2;
+      if ( ypos+imgh/2 > ybound ) group.children[i].position.y = ybound - imgh/2;
       // animate
   		group.children[i].position.x += dX[i];
       group.children[i].position.y += dY[i];
