@@ -117,14 +117,14 @@ ben.onMouseLeave = function() {
   view.element.style.setProperty('cursor', null);
 }
 ben.onClick = function(event) {
-  window.open("../img/photos/BenP.png", "ben", "width=450,height=452");
+  window.open("http://neeta.works/ben-lily/img/photos/BenP.png", "ben", "width=450,height=452");
 }
 
 // add lily painting + href
 var lily = new Raster("lily");
 lily.onMouseEnter = function() {view.element.style.setProperty('cursor', 'pointer');}
 lily.onMouseLeave = function() {view.element.style.setProperty('cursor', null);}
-lily.onClick = function(event) {window.open("../img/photos/LilyP.png", "lily", "width=450,height=326");}
+lily.onClick = function(event) {window.open("http://neeta.works/ben-lily/img/photos/LilyP.png", "lily", "width=450,height=326");}
 
 // add all other paintings
 var bird1 = new Raster("bird1");
