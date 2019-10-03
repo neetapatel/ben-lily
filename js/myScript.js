@@ -1,31 +1,4 @@
-// add type
-
-/*
-// attempt at using actual type
-var line = new PointText(new Point(200, 50));
-line.justification = 'center';
-line.fillColor = 'black';
-line.content = 'Ben Denzer';
-var line2 = new PointText(new Point(200, 100));
-line2.justification = 'center';
-line2.fillColor = 'black';
-line2.content = 'Lily Offit';
-var line3 = new PointText(new Point(200, 150));
-line3.justification = 'center';
-line3.fillColor = 'black';
-line3.content = 'June 28, 2020';
-var line4 = new PointText(new Point(200, 200));
-line4.fillColor = 'black';
-line4.content = 'New York City';
-line4.style = {
-    fontFamily: 'HTFDidot',
-    fontSize: 200,
-    fillColor: 'red',
-    justification: 'center'
-};
-*/
-
-// attempt at stacking background images
+// stacking background type-images
 var bg1 = new Raster("bg-1");
 var path1 = new Path.Rectangle({
     point: [0, 0],
@@ -128,15 +101,6 @@ bg4.onClick = function(event) {
   window.open("https://images.app.goo.gl/gMTpCLH6L32y7KCE6");
 }
 
-/*
-var groupType = new Group();
-groupType.addChild(bg1);
-groupType.addChild(bg2);
-groupType.addChild(bg3);
-groupType.addChild(bg4);
-groupType.postion = view.center;
-*/
-
 // new active layer
 var secondLayer = new Layer();
 
@@ -153,11 +117,16 @@ ben.onMouseLeave = function() {
   view.element.style.setProperty('cursor', null);
 }
 ben.onClick = function(event) {
-  window.open("https://bendenzer.com");
+  window.open("../img/photos/BenP.png", "ben", "width=450,height=452");
 }
 
-// add all other paintings
+// add lily painting + href
 var lily = new Raster("lily");
+lily.onMouseEnter = function() {view.element.style.setProperty('cursor', 'pointer');}
+lily.onMouseLeave = function() {view.element.style.setProperty('cursor', null);}
+lily.onClick = function(event) {window.open("../img/photos/LilyP.png", "lily", "width=450,height=326");}
+
+// add all other paintings
 var bird1 = new Raster("bird1");
 var bird2 = new Raster("bird2");
 var bird3 = new Raster("bird3");
@@ -166,15 +135,18 @@ var bird5 = new Raster("bird5");
 var bird6 = new Raster("bird6");
 var bird7 = new Raster("bird7");
 var buritto1 = new Raster("buritto1");
+var cab1 = new Raster("cab1");
 var cactus1 = new Raster("cactus1");
 var century1 = new Raster("century1");
 var cookie1 = new Raster("cookie1");
 var corn1 = new Raster("corn1");
 var flowers1 = new Raster("flowers1");
+var flowers2 = new Raster("flowers2");
 var glue1 = new Raster("glue1");
 var hat1 = new Raster("hat1");
-var met1 = new Raster("met1");
+var hotpot1 = new Raster("hotpot1");
 var napkin1 = new Raster("napkin1");
+var parm1 = new Raster("parm1");
 var puppy1 = new Raster("puppy1");
 var puppy2 = new Raster("puppy2");
 var puppy3 = new Raster("puppy3");
@@ -208,15 +180,18 @@ group.addChild(bird5);
 group.addChild(bird6);
 group.addChild(bird7);
 group.addChild(buritto1);
+group.addChild(cab1);
 group.addChild(cactus1);
 group.addChild(century1);
 group.addChild(cookie1);
 group.addChild(corn1);
 group.addChild(flowers1);
+group.addChild(flowers2);
 group.addChild(glue1);
 group.addChild(hat1);
-group.addChild(met1);
+group.addChild(hotpot1);
 group.addChild(napkin1);
+group.addChild(parm1);
 group.addChild(puppy1);
 group.addChild(puppy2);
 group.addChild(puppy3);
