@@ -134,7 +134,7 @@ ben.onClick = function(event) {
 var lily = new Raster("lily");
 lily.onMouseEnter = function() {view.element.style.setProperty('cursor', 'pointer');}
 lily.onMouseLeave = function() {view.element.style.setProperty('cursor', null);}
-lily.onClick = function(event) {window.open("photos/LilyP.jpg", "Lily", "width=450,height=326");}
+lily.onClick = function(event) {window.open("/photos/LilyP.jpg", "Lily", "width=450,height=326");}
 
 var bird1 = new Raster("bird1");
 bird1.onMouseEnter = function() {view.element.style.setProperty('cursor', 'pointer');}
