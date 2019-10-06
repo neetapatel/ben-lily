@@ -116,25 +116,15 @@ var secondLayer = new Layer();
 
 // add ben painting + href
 var ben = new Raster("ben");
-// on mouse enter...
-ben.onMouseEnter = function() {
-  // ...set canvas cursor to pointer
-  view.element.style.setProperty('cursor', 'pointer');
-}
-// on mouse leave...
-ben.onMouseLeave = function() {
-  // ...set canvas cursor to default
-  view.element.style.setProperty('cursor', null);
-}
-ben.onClick = function(event) {
-  window.open("http://neeta.works/ben-lily/img/photos/BenP.jpg", "Ben", "width=450,height=452");
-}
+ben.onMouseEnter = function() {view.element.style.setProperty('cursor', 'pointer');}
+ben.onMouseLeave = function() {view.element.style.setProperty('cursor', null);}
+ben.onClick = function(event) {window.open("http://neeta.works/ben-lily/img/photos/BenP.jpg", "Ben", "width=425,height=450");}
 
 // add lily painting + href
 var lily = new Raster("lily");
 lily.onMouseEnter = function() {view.element.style.setProperty('cursor', 'pointer');}
 lily.onMouseLeave = function() {view.element.style.setProperty('cursor', null);}
-lily.onClick = function(event) {window.open("http://neeta.works/ben-lily/img/photos/LilyP.jpg", "Lily", "width=450,height=326");}
+lily.onClick = function(event) {window.open("http://neeta.works/ben-lily/img/photos/LilyP.jpg", "Lily", "width=422,height=328");}
 
 var bird1 = new Raster("bird1");
 bird1.onMouseEnter = function() {view.element.style.setProperty('cursor', 'pointer');}
